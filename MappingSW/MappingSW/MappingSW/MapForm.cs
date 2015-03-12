@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -38,6 +39,28 @@ namespace MappingSW
                     this.Controls.Add(buttons[i, j]);
                 }
             }
+        }
+
+        private void exBut_Click(object sender, EventArgs e)
+        {
+            int curC = 0, r = 0;
+            int c = Convert.ToInt32(xText.Text);
+
+            string[] fileString = new string[c];
+
+            foreach (mButton item in this.Controls.OfType<mButton>())
+            {
+                curC++;
+                fileString[r] += item.state.ToString();
+
+                if (curC == c)
+                {
+                    r++;
+                    curC = 0;
+                }
+            }
+
+            File.WriteAllLines("map.txt", fileString);
         }
     }
 }
