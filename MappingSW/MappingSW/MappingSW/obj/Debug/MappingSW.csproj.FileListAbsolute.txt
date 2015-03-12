@@ -1,0 +1,10 @@
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\bin\Debug\MappingSW.exe.config
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\bin\Debug\MappingSW.exe
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\bin\Debug\MappingSW.pdb
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\obj\Debug\MappingSW.csprojResolveAssemblyReference.cache
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\obj\Debug\MappingSW.Map.resources
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\obj\Debug\MappingSW.Properties.Resources.resources
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\obj\Debug\MappingSW.csproj.GenerateResource.Cache
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\obj\Debug\MappingSW.exe
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\obj\Debug\MappingSW.pdb
+C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\MappingSW\MappingSW\obj\Debug\MappingSW.mButton.resources
