@@ -27,7 +27,7 @@ namespace MappingSW
         {
             base.OnClick(e);
 
-            if (state == 2) state = 0;
+            if (state == 3) state = 0;
             else state++;
 
             switch (state)
@@ -39,6 +39,9 @@ namespace MappingSW
                     BackColor = System.Drawing.Color.Black;
                     break;
                 case 2:
+                    BackColor = System.Drawing.Color.Green;
+                    break;
+                case 3:
                     BackColor = System.Drawing.Color.Red;
                     break;
                 default:
