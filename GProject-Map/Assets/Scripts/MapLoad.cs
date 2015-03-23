@@ -37,6 +37,7 @@ public class MapLoad : MonoBehaviour {
 
 
 		for (int i = 0; i < mapString.Length; i++) {
+			mapString[i].Trim ();
 
 			foreach (char oState in mapString[i]) {
 				switch(oState)
@@ -64,10 +65,10 @@ public class MapLoad : MonoBehaviour {
 			startZ += 1.0f;
 		}
 
-		GameObject P = (GameObject)Instantiate (player, new Vector3 (maxX / 2, 0.5f, startZ / 2), Quaternion.identity);
+		GameObject P = (GameObject)Instantiate (player, new Vector3 (maxX / 2.0f - 0.5f, 0.5f, startZ / 2.0f - 0.5f), Quaternion.identity);
 		Debug.Log ("*" + P.transform.position.ToString() + "*");
 
-		GameObject C = (GameObject)Instantiate (camera, new Vector3 (maxX / 2, 2f, startZ-1 / 2), Quaternion.identity);
+		GameObject C = (GameObject)Instantiate (camera, new Vector3 (maxX / 2.0f - 0.5f, 2f, startZ / 2.0f - 0.5f), Quaternion.identity);
 		MCamera CClass = C.GetComponent (typeof(MCamera)) as MCamera;
 		CClass.Initialize (P.transform);
 
