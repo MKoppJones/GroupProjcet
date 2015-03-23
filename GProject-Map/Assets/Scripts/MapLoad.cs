@@ -9,6 +9,8 @@ public class MapLoad : MonoBehaviour {
 	public GameObject spawn;
 	public GameObject bwall;
 	public GameObject floor;
+	public GameObject player;
+	public GameObject camera;
 
 	private StreamReader theReader = new StreamReader("map.txt", Encoding.Default);
 
@@ -16,10 +18,17 @@ public class MapLoad : MonoBehaviour {
 	private string[] mapString;
 	private float startX = 0.0f;
 	private float startZ = 0.0f;
+	private float maxX = 0.0f;
 
+	protected static MapLoad instance;
+	
 	// Use this for initialization
-	void Start () {
-		using (theReader) {
+	void Start () 
+	{
+		instance = this;
+
+		using (theReader) 
+		{
 
 			mapString = theReader.ReadToEnd ().Split ('\n');
 			theReader.Close();
@@ -28,7 +37,7 @@ public class MapLoad : MonoBehaviour {
 
 
 		for (int i = 0; i < mapString.Length; i++) {
-			Debug.Log ("*" + mapString[1] + "*");
+
 			foreach (char oState in mapString[i]) {
 				switch(oState)
 				{
@@ -50,14 +59,23 @@ public class MapLoad : MonoBehaviour {
 				}
 				startX += 1.0f;
 			}
+			if(startX != 0.0f) maxX = startX;
 			startX = 0.0f;
 			startZ += 1.0f;
 		}
 
+		GameObject P = (GameObject)Instantiate (player, new Vector3 (maxX / 2, 0.5f, startZ / 2), Quaternion.identity);
+		Debug.Log ("*" + P.transform.position.ToString() + "*");
+
+		GameObject C = (GameObject)Instantiate (camera, new Vector3 (maxX / 2, 2f, startZ-1 / 2), Quaternion.identity);
+		MCamera CClass = C.GetComponent (typeof(MCamera)) as MCamera;
+		CClass.Initialize (P.transform);
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 	
 	}
 }
