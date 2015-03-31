@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Scanner : MonoBehaviour {
+	
+	public GameObject radius;
+	
 	[System.Serializable]
 	public class Freeware
 	{
@@ -21,20 +24,22 @@ public class Scanner : MonoBehaviour {
             playerMoney -= cost;
 		}
 
-		public void Scan(GameObject g)
+		public void Scan(GameObject g, GameObject r)
 		{
 			g.GetComponent<SphereCollider> ().radius += 0.05f;
+			r.transform.localScale = new Vector3(r.transform.localScale.x + 0.1f, r.transform.localScale.y + 0.1f, r.transform.localScale.z + 0.1f);
 			if (g.GetComponent<SphereCollider> ().radius >= scanRadius) {
 				g.GetComponent<SphereCollider> ().radius = 0.5f;
+				r.transform.localScale = new Vector3(1, 1, 1);
 				isScanning = false;
 				timer = 0;
 			}
 		}
 		
-		public void Tick(GameObject g)
+		public void Tick(GameObject g, GameObject r)
 		{
 			if (isScanning) {
-				Scan(g);
+				Scan(g, r);
 			} else {
 				timer += Time.deltaTime;
 				if (timer >= pingTime)
@@ -44,7 +49,6 @@ public class Scanner : MonoBehaviour {
 					Scanner.filesScanned = 0;
 				}
 			}
-			Debug.Log ("Freeware Tick");
 		}
 
 		public void Deactivate(ref float startSpeed, ref float attackSpeed)
@@ -72,20 +76,22 @@ public class Scanner : MonoBehaviour {
             playerMoney -= cost;
 		}
 
-		public void Scan(GameObject g)
+		public void Scan(GameObject g, GameObject r)
 		{
 			g.GetComponent<SphereCollider> ().radius += 0.05f;
+			r.transform.localScale = new Vector3(r.transform.localScale.x + 0.1f, r.transform.localScale.y + 0.1f, r.transform.localScale.z + 0.1f);
 			if (g.GetComponent<SphereCollider> ().radius >= scanRadius) {
 				g.GetComponent<SphereCollider> ().radius = 0.5f;
+				r.transform.localScale = new Vector3(1, 1, 1);
 				isScanning = false;
 				timer = 0;
 			}
 		}
 
-		public void Tick(GameObject g)
+		public void Tick(GameObject g, GameObject r)
 		{
 			if (isScanning) {
-				Scan(g);
+				Scan(g, r);
 			} else {
 				timer += Time.deltaTime;
 				if (timer >= pingTime)
@@ -96,7 +102,6 @@ public class Scanner : MonoBehaviour {
 					Scanner.filesScanned = 0;
 				}
 			}
-			Debug.Log ("Paid Tick");
 		}
 		
 		public void Deactivate(ref float attackSpeed)
@@ -113,30 +118,49 @@ public class Scanner : MonoBehaviour {
 		public bool isScanning = true;
 		public float scanRadius = 25;
 		public float timer = 0.0f;
+		public float energyCount = 100;
 
         public void Activate(ref int playerMoney)
         {
             playerMoney -= cost;
 		}
 		
-		public void Scan(GameObject g)
+		public void Scan(GameObject g, GameObject r, Slider s)
 		{
-            Debug.Log("SCAN");
 			g.GetComponent<SphereCollider> ().radius += 0.05f;
+			r.transform.localScale = new Vector3(r.transform.localScale.x + 0.1f, r.transform.localScale.y + 0.1f, r.transform.localScale.z + 0.1f);
 			if (g.GetComponent<SphereCollider> ().radius >= scanRadius) {
 				g.GetComponent<SphereCollider> ().radius = 0.5f;
+				r.transform.localScale = new Vector3(1, 1, 1);
 				Scanner.badFiles = 0;
 				Scanner.filesScanned = 0;
 			}
 		}
 		
-		public void Tick(GameObject g)
+		public void Tick(GameObject g, GameObject r, Slider s)
 		{
 			if (isScanning) {
-				Scan(g);
+				if (s.value != 0)
+				{
+						Scan(g, r, s);
+						s.value-= Time.deltaTime*8;
+				}
+				else
+				{
+					isScanning = false;
+				}
 			}
-
-			Debug.Log ("Commercial Tick");
+			else
+			{
+				if (s.value < s.maxValue)
+				{
+					s.value+= Time.deltaTime*8;
+				}
+				else
+				{
+					isScanning = true;
+				}
+			}
 		}
 		
 		public void Deactivate()
@@ -161,7 +185,11 @@ public class Scanner : MonoBehaviour {
 
 	public Text totalScannedText;
 	public Text totalBadFoundText;
-
+	
+	public Slider energy;
+	
+	public GameObject marker;
+	
 	// Use this for initialization
 	void Start () {
 		Activate (currentScanner);
@@ -194,17 +222,27 @@ public class Scanner : MonoBehaviour {
 	{
 		switch (index) {
 		case 0:
-			freeware.Tick (gameObject);
+			freeware.Tick (gameObject, radius);
+			RefillScanner();
 			break;
 		case 1:
-			paid.Tick (gameObject);
+			paid.Tick (gameObject, radius);
+			RefillScanner();
 			break;
 		case 2:
-			commercial.Tick (gameObject);
+			commercial.Tick (gameObject, radius, energy);
 			break;
 		}
 	}
-
+	
+	void RefillScanner()
+	{
+		if (energy.value < energy.maxValue)
+		{
+			energy.value+= Time.deltaTime*8;
+		}
+	}
+	
 	void Deactivate(int index)
 	{
 		switch (index) {
@@ -232,7 +270,11 @@ public class Scanner : MonoBehaviour {
 				filesScanned++;
 				System.Random rnd = new System.Random();
 				if (rnd.Next (101) > 50)
+				{
 					badFiles++;
+					GameObject g = (GameObject)Instantiate(marker, col.transform.position, Quaternion.identity);
+					g.transform.parent = col.transform;
+				}
 			}
 			break;
 		case 1:
@@ -244,10 +286,24 @@ public class Scanner : MonoBehaviour {
 				filesScanned++;
 				System.Random rnd = new System.Random();
 				if (rnd.Next (101) > 25)
+				{
 					badFiles++;
+					GameObject g = (GameObject)Instantiate(marker, col.transform.position, Quaternion.identity);
+					g.transform.parent = col.transform;
+				}
 			}
 			break;
 		case 2:
+			if (col.tag == "File")
+				filesScanned++;
+			
+			if (col.tag == "Enemy")
+			{
+				filesScanned++;
+				badFiles++;
+				GameObject g = (GameObject)Instantiate(marker, col.transform.position, Quaternion.identity);
+				g.transform.parent = col.transform;
+			}
 			break;
 		}
 	}
