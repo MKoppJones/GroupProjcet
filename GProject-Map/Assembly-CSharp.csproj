@@ -46,10 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GameHandle.cs" />
      <Compile Include="Assets\Scripts\MCamera.cs" />
      <Compile Include="Assets\Scripts\MapLoad.cs" />
      <Compile Include="Assets\Scripts\OnSpawn.cs" />
      <Compile Include="Assets\Scripts\PFind.cs" />
+     <Compile Include="Assets\SpawnScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -1,6 +1,0 @@
-C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\AStar\AStar\bin\Debug\AStar.exe.config
-C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\AStar\AStar\obj\Debug\AStar.csprojResolveAssemblyReference.cache
-C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\AStar\AStar\bin\Debug\AStar.exe
-C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\AStar\AStar\bin\Debug\AStar.pdb
-C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\AStar\AStar\obj\Debug\AStar.exe
-C:\Users\Jekk\Documents\GitHub\GroupProject\MappingSW\AStar\AStar\obj\Debug\AStar.pdb

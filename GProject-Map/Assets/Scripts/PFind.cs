@@ -24,6 +24,11 @@ public class PFind : MonoBehaviour {
 
 	}
 
+	public void ReloadMap()
+	{
+		eGridCosts = GameObject.Find ("MapLoader").GetComponent<MapLoad> ().gridCosts;
+	}
+
 	void Update()
 	{
 		CalculateNextMovement ();
@@ -36,6 +41,8 @@ public class PFind : MonoBehaviour {
 
 		if (!isMoving) 
 		{
+			if(eGridCosts[cGridR, cGridC] == 1) ProcessCoreEntry();
+
 			isMoving = true;
 			cPosition = transform.position;
 			int lowestCost = 10000;
@@ -64,7 +71,7 @@ public class PFind : MonoBehaviour {
 				moveDir = 4;
 			}
 		}
-		Debug.Log (cGridC.ToString () + ", " + cGridR.ToString ());
+		//Debug.Log (cGridC.ToString () + ", " + cGridR.ToString ());
 	}
 
 	void MoveEntityOnGrid()
@@ -101,5 +108,10 @@ public class PFind : MonoBehaviour {
 			transform.position = tPosition;
 			cGridC = (int)transform.position.x; cGridR = (int)transform.position.z;
 		} 
+	}
+
+	void ProcessCoreEntry()
+	{
+		Destroy (this);
 	}
 }

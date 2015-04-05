@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -13,7 +14,6 @@ public class MapLoad : MonoBehaviour {
 	public GameObject floor;
 	public GameObject player;
 	public GameObject camera;
-	public GameObject testentity;
 
 	private StreamReader theReader = new StreamReader("map.txt", Encoding.Default);
 
@@ -22,14 +22,16 @@ public class MapLoad : MonoBehaviour {
 	private float startX = 0.0f;
 	private float startZ = 0.0f;
 	private float maxX = 0.0f;
+	private List<GameObject> Spawns = new List<GameObject>();
 
 	protected static MapLoad instance;
 
 	//Variables for map grid referencing
 
 	public int[,] gridCosts;
+
 	private int cArrayC = 0, cArrayR = 0; //Position of the core in the map string array
-	private static string[] map = {
+	/*private static string[] map = {
 		"11111111111111111",
 		"10000000000000001",
 		"10111111011111101",
@@ -47,7 +49,7 @@ public class MapLoad : MonoBehaviour {
 		"10111111311111101",
 		"10000000000000001",
 		"11111211111211111"
-	};
+	};*/
 	
 	// Use this for initialization
 	void Start () 
@@ -59,7 +61,9 @@ public class MapLoad : MonoBehaviour {
 		InitializeObjects ();
 		InitializeGrid ();
 
-		Instantiate(testentity, new Vector3(1f,1f,1f), Quaternion.identity);
+		GameHandle gHandle = this.GetComponent(typeof(GameHandle)) as GameHandle;
+		gHandle.Initialize (Spawns);
+
 	}
 	
 	// Update is called once per frame
@@ -81,7 +85,7 @@ public class MapLoad : MonoBehaviour {
 	void InitializeObjects()
 	{
 		for (int i = 0; i < mapString.Length; i++) {
-			mapString[i].Trim ();
+			mapString[i] = mapString[i].Replace ("\r", string.Empty);
 			
 			foreach (char oState in mapString[i]) {
 				switch(oState)
@@ -89,17 +93,24 @@ public class MapLoad : MonoBehaviour {
 				case '1':
 					Instantiate(wall, new Vector3(startX,0.5f,startZ), Quaternion.identity);
 					break;
+
 				case '2':
-					Instantiate(spawn, new Vector3(startX,0.5f,startZ), Quaternion.identity);
+					GameObject sClone = (GameObject)Instantiate(spawn, new Vector3(startX,0.5f,startZ), Quaternion.identity);
+					Spawns.Add (sClone);
 					break;
+
 				case '3':
 					Instantiate(bwall, new Vector3(startX,0.5f,startZ), Quaternion.identity);
 					break;
+
 				case '0':
 					GameObject fClone = (GameObject)Instantiate(floor, new Vector3(startX,0f,startZ), Quaternion.identity);
 					fClone.transform.Rotate (Vector3.right * 90);
 					break;
+
 				default:
+					GameObject faClone = (GameObject)Instantiate(floor, new Vector3(startX,0f,startZ), Quaternion.identity);
+					faClone.transform.Rotate (Vector3.right * 90);
 					break;
 				}
 				startX += 1.0f;
@@ -119,20 +130,20 @@ public class MapLoad : MonoBehaviour {
 
 	void InitializeGrid(/*Vector3 target, string[] mapGrid*/)
 	{
-		gridCosts = new int[map.Length, map[0].Length];
+		gridCosts = new int[mapString.Length, mapString[0].Length];
 
 		//Get the position of the core for the grid.
-		for (int i = 0; i < map.Length; i++) 
+		for (int i = 0; i < mapString.Length; i++) 
 		{
-			for (int j = 0; j < map[i].Length; j++) 
+			for (int j = 0; j < mapString[i].Length; j++) 
 			{
-				if(map[i][j] == '5')
+				if(mapString[i][j] == '5')
 				{
 					gridCosts[i, j] = 1;
 					cArrayC = j; cArrayR = i;
 				}
 
-				if(map[i][j] == '1' || map[i][j] == '2' || map[i][j] == '3') gridCosts[i, j] = 1000;
+				if(mapString[i][j] == '1' || mapString[i][j] == '2' || mapString[i][j] == '3') gridCosts[i, j] = 1000;
 
 			}
 		}
