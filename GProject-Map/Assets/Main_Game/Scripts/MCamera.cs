@@ -15,14 +15,14 @@ public class MCamera : MonoBehaviour {
 	{
 		target = t;
 		//transform.RotateAround(transform.position, transform.right, 65f);
-		transform.rotation *= Quaternion.Euler(65, 180, 0);
+		transform.rotation *= Quaternion.Euler(65, 0, 0);
 
 	}
 	
 	void Update () 
 	{
 		transform.position = Vector3.Lerp (new Vector3(transform.position.x, transform.position.y, transform.position.z), 
-		                                   new Vector3(target.position.x, target.position.y+10f, target.position.z+6f), 
+		                                   new Vector3(target.position.x, target.position.y+4f, target.position.z-2f), 
 		            					   Time.deltaTime * smooth);
 	}
 }

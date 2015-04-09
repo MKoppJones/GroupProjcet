@@ -1,9 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Main_Game\Scripts\SpawnScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Main_Game\Scripts\MapLoad.cs">
     <Files>
-      <File FileName="Assets\Main_Game\Scripts\GameHandle.cs" Line="59" Column="27" />
-      <File FileName="Assets\Main_Game\Scripts\SpawnScript.cs" Line="30" Column="3" />
+      <File FileName="Assets\Main_Game\Scripts\OnSpawn.cs" Line="27" Column="59" />
+      <File FileName="Assets\Main_Game\Scripts\SpawnScript.cs" Line="66" Column="2" />
+      <File FileName="Assets\Main_Game\Scripts\PFind.cs" Line="118" Column="1" />
+      <File FileName="Assets\Main_Game\Scripts\MCamera.cs" Line="29" Column="1" />
+      <File FileName="Assets\Main_Game\Scripts\MapLoad.cs" Line="111" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

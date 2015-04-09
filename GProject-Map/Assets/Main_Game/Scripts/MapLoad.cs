@@ -107,7 +107,8 @@ public class MapLoad : MonoBehaviour {
 					GameObject bClone = (GameObject)Instantiate(floor, new Vector3(startX,0f,startZ), Quaternion.identity);
 					bClone.transform.Rotate (Vector3.right * 90);
 
-					GameObject P = (GameObject)Instantiate (player, new Vector3 (startX,0.5f,startZ), Quaternion.identity);
+					GameObject P = (GameObject)Instantiate (player, new Vector3 (startX,1f,startZ), Quaternion.identity);
+					//P.transform.rotation *= Quaternion.Euler(270, 0, 0);
 					
 					GameObject C = (GameObject)Instantiate (camera, new Vector3 (startX,2f,startZ), Quaternion.identity);
 					MCamera CClass = C.GetComponent (typeof(MCamera)) as MCamera;
