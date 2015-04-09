@@ -10,6 +10,7 @@ public class GameHandle : MonoBehaviour {
 	public GameObject[] MediumViruses;
 	public GameObject[] HardViruses;
 	public GameObject Bit;
+	
 
 	private List<GameObject> SpawnPoints;
 	private int SpawnCount = 0;

@@ -15,13 +15,15 @@ public class MapLoad : MonoBehaviour {
 	public GameObject player;
 	public GameObject camera;
 
+	public float coreX = 0f;
+	public float coreZ = 0f;
+	
 	private StreamReader theReader = new StreamReader("map.txt", Encoding.Default);
 
 	//private string[] mapTest = {"11211", "10001", "10001", "10001", "11111"};
 	private string[] mapString;
 	private float startX = 0.0f;
 	private float startZ = 0.0f;
-	private float maxX = 0.0f;
 	private List<GameObject> Spawns = new List<GameObject>();
 
 	protected static MapLoad instance;
@@ -29,8 +31,7 @@ public class MapLoad : MonoBehaviour {
 	//Variables for map grid referencing
 
 	public int[,] gridCosts;
-
-	private int cArrayC = 0, cArrayR = 0; //Position of the core in the map string array
+	
 	/*private static string[] map = {
 		"11111111111111111",
 		"10000000000000001",
@@ -108,7 +109,6 @@ public class MapLoad : MonoBehaviour {
 					bClone.transform.Rotate (Vector3.right * 90);
 
 					GameObject P = (GameObject)Instantiate (player, new Vector3 (startX,1f,startZ), Quaternion.identity);
-					//P.transform.rotation *= Quaternion.Euler(270, 0, 0);
 					
 					GameObject C = (GameObject)Instantiate (camera, new Vector3 (startX,2f,startZ), Quaternion.identity);
 					MCamera CClass = C.GetComponent (typeof(MCamera)) as MCamera;
@@ -132,7 +132,6 @@ public class MapLoad : MonoBehaviour {
 				}
 				startX += 1.0f;
 			}
-			if(startX != 0.0f) maxX = startX;
 			startX = 0.0f;
 			startZ += 1.0f;
 		}
@@ -150,7 +149,7 @@ public class MapLoad : MonoBehaviour {
 				if(mapString[i][j] == '5')
 				{
 					gridCosts[i, j] = 1;
-					cArrayC = j; cArrayR = i;
+					coreX = (float)j; coreZ = (float)i;
 				}
 
 				if(mapString[i][j] == '1' || mapString[i][j] == '2' || mapString[i][j] == '3') gridCosts[i, j] = 1000;

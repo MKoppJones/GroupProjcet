@@ -5,7 +5,6 @@ public class PFind : MonoBehaviour {
 
 	public float moveSpeed = 1f;
 	float approachDist = 0.01f;
-	bool inDist = false;
 
 	private int cGridC = 0, cGridR = 0; //Current grid position of this entity.
 	private int[,] eGridCosts; //Used for cloning the grid costs of the MapLoad object.
