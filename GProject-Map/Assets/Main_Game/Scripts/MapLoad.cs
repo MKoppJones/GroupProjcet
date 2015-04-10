@@ -32,26 +32,6 @@ public class MapLoad : MonoBehaviour {
 
 	public int[,] gridCosts;
 	
-	/*private static string[] map = {
-		"11111111111111111",
-		"10000000000000001",
-		"10111111011111101",
-		"10100000000000101",
-		"10101111311110101",
-		"10101000000010101",
-		"10101010101010101",
-		"10101010001010101",
-		"10101010501010101",
-		"10101010001010101",
-		"10101011311010101",
-		"10101000000010101",
-		"10101111011110101",
-		"10100000000000101",
-		"10111111311111101",
-		"10000000000000001",
-		"11111211111211111"
-	};*/
-	
 	// Use this for initialization
 	void Start () 
 	{
@@ -92,12 +72,14 @@ public class MapLoad : MonoBehaviour {
 				switch(oState)
 				{
 				case '1':
-					Instantiate(wall, new Vector3(startX,0.5f,startZ), Quaternion.identity);
+					GameObject sWall = (GameObject)Instantiate(wall, new Vector3(startX,0.5f,startZ), Quaternion.identity);
+					sWall.transform.parent = transform;
 					break;
 
 				case '2':
 					GameObject sClone = (GameObject)Instantiate(spawn, new Vector3(startX,0.5f,startZ), Quaternion.identity);
 					Spawns.Add (sClone);
+					sClone.transform.parent = transform;
 					break;
 
 				case '3':
@@ -107,6 +89,7 @@ public class MapLoad : MonoBehaviour {
 				case '4':
 					GameObject bClone = (GameObject)Instantiate(floor, new Vector3(startX,0f,startZ), Quaternion.identity);
 					bClone.transform.Rotate (Vector3.right * 90);
+					bClone.transform.parent = transform;
 
 					GameObject P = (GameObject)Instantiate (player, new Vector3 (startX,1f,startZ), Quaternion.identity);
 					
@@ -125,6 +108,7 @@ public class MapLoad : MonoBehaviour {
 				case '0':
 					GameObject fClone = (GameObject)Instantiate(floor, new Vector3(startX,0f,startZ), Quaternion.identity);
 					fClone.transform.Rotate (Vector3.right * 90);
+					fClone.transform.parent = transform;
 					break;
 
 				default:

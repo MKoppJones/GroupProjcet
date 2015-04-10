@@ -16,6 +16,6 @@ public class UICamera : MonoBehaviour {
 		coreLocX = GameObject.Find ("MapLoader").GetComponent<MapLoad> ().coreX;
 		coreLocZ = GameObject.Find ("MapLoader").GetComponent<MapLoad> ().coreZ;
 
-		transform.position =  new Vector3(coreLocX, 15f, coreLocZ);
+		transform.position =  new Vector3(coreLocX, 16f, coreLocZ);
 	}
 }

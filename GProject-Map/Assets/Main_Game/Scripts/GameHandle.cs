@@ -58,7 +58,7 @@ public class GameHandle : MonoBehaviour {
 	void SpawnBits()
 	{
 		SpawnScript sHandle = SpawnPoints [CurrentSpawn].GetComponent(typeof(SpawnScript)) as SpawnScript;
-		sHandle.Invoke (Bit, 5);
+		sHandle.Invoke (Bit, 3);
 	}
 
 	IEnumerator SpawnVirus()

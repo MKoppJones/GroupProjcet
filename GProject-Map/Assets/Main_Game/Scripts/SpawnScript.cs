@@ -60,7 +60,7 @@ public class SpawnScript : MonoBehaviour {
 		spawnObjects = false;
 		for (int i = 0; i < spawnCount; i++) {
 			GameObject entityClone = (GameObject)Instantiate (targetObject, transform.position, Quaternion.identity);
-			yield return new WaitForSeconds (.3f);
+			yield return new WaitForSeconds (.5f);
 		}
 	}
 }

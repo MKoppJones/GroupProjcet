@@ -52,6 +52,7 @@
      <Compile Include="Assets\Main_Game\Scripts\MapLoad.cs" />
      <Compile Include="Assets\Main_Game\Scripts\PFind.cs" />
      <Compile Include="Assets\Main_Game\Scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Main_Game\Scripts\ScannerScript.cs" />
      <Compile Include="Assets\Main_Game\Scripts\SpawnScript.cs" />
      <Compile Include="Assets\Main_Game\Scripts\UICamera.cs" />
  <Reference Include="UnityEngine.UI">
