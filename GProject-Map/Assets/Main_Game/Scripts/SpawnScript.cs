@@ -5,6 +5,7 @@ public class SpawnScript : MonoBehaviour {
 
 	bool spawnObjects = false;
 	bool spawnVirus = false;
+    GameObject trojanObject;
 	int spawnCount = 0;
 
 	GameObject targetObject;
@@ -26,11 +27,11 @@ public class SpawnScript : MonoBehaviour {
 		}
 	}
 
-	public void Invoke(GameObject t, int count) 
+	public void Invoke(GameObject t, GameObject trojan, int count) 
 	{
 
 		spawnCount = count; targetObject = t;
-
+        trojanObject = trojan;
 		spawnObjects = true;
 
 
@@ -58,8 +59,21 @@ public class SpawnScript : MonoBehaviour {
 	IEnumerator Spawn()
 	{
 		spawnObjects = false;
-		for (int i = 0; i < spawnCount; i++) {
-			GameObject entityClone = (GameObject)Instantiate (targetObject, transform.position, Quaternion.identity);
+
+        System.Random rnd = new System.Random ();
+
+		for (int i = 0; i < spawnCount; i++) 
+        {
+
+            if(rnd.Next(0, 10) == 5)
+            {
+                GameObject trojanClone = (GameObject)Instantiate(trojanObject, transform.position, Quaternion.identity);
+            }
+            else 
+            {
+                GameObject entityClone = (GameObject)Instantiate (targetObject, transform.position, Quaternion.identity);
+            }
+			
 			yield return new WaitForSeconds (.5f);
 		}
 	}

@@ -6,22 +6,32 @@ public class CoreScript : MonoBehaviour {
 
 	public int money = 0;
 	public int health = 100;
-	public GameObject coreText;
+	public GameObject scannerObject;
+
+    private GameObject coreText;
 
 	// Use this for initialization
 	void Start () {
-
+		GameObject scanner = (GameObject)Instantiate (scannerObject, transform.position, Quaternion.identity);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		UpdateUI ();
+	}
+
+	void UpdateUI () {
+
+		//Update core health
+
+		coreText = GameObject.Find ("CoreText");
+		coreText.GetComponent<Text>().text = "Core Health: " + health.ToString();
 	}
 
 	void OnCollisionEnter (Collision col)
 	{
-		coreText = GameObject.Find ("CoreText");
 
+		//Safe
 		if(col.gameObject.tag == "Bit")
 		{
 			Destroy(col.gameObject);
@@ -29,14 +39,16 @@ public class CoreScript : MonoBehaviour {
 			money += 5;
 		}
 
+		//Virus collision detection
 		if (col.gameObject.tag == "Virus") 
 		{
 			Destroy(col.gameObject);
 			health -= 5;
-			coreText.GetComponent<Text>().text = "Core Health: " + health.ToString();
+
 
 			if(health == 0)
 			{
+				//Set end game conditions here
 				Destroy (gameObject);
 			}
 		}

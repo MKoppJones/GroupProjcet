@@ -5,6 +5,9 @@ public class PlayerScript : MonoBehaviour {
 
 	public float moveSpeed = 3f;
 	public float turningSpeed = 5f;
+	public float attackSpeed = 2f;
+	public float moveMultiplier = 1f;
+	public float attackMultiplier = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -14,10 +17,12 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Movement
-		float speed  = moveSpeed * Time.deltaTime;	
-		float turnSpeed = turningSpeed * Time.deltaTime;
 
+		//Multiplier handling
+		float speed  = (moveSpeed * moveMultiplier) * Time.deltaTime;	
+		float turnSpeed = (turningSpeed * moveMultiplier) * Time.deltaTime;
+
+		//Movement
 		if (Input.GetButton ("Forward")) {
 			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + speed);
 		}
