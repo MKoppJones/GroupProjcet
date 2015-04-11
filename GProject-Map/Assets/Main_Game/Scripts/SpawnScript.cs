@@ -19,9 +19,12 @@ public class SpawnScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+        //If Bits are being spawned,
 		if (spawnObjects) {
 			StartCoroutine("Spawn");
 		}
+
+        //If viruses are invoked
 		else if (spawnVirus) {
 			StartCoroutine ("SpawnVirus");
 		}
@@ -31,6 +34,8 @@ public class SpawnScript : MonoBehaviour {
 	{
 
 		spawnCount = count; targetObject = t;
+
+        //Trojan object is defined here so we can change it to any other object if need be.
         trojanObject = trojan;
 		spawnObjects = true;
 
@@ -49,6 +54,7 @@ public class SpawnScript : MonoBehaviour {
 
 	IEnumerator SpawnVirus()
 	{
+        //Spawns as many viruses as stated, with a .3 second gap inbetween each.
 		spawnVirus = false;
 		for (int i = 0; i < spawnCount; i++) {
 			GameObject entityClone = (GameObject)Instantiate (targetObject, transform.position, Quaternion.identity);
@@ -62,6 +68,7 @@ public class SpawnScript : MonoBehaviour {
 
         System.Random rnd = new System.Random ();
 
+        //The random is used to give a 1 in 10 chance to spawn a Trojan which essentially looks like a Bit.
 		for (int i = 0; i < spawnCount; i++) 
         {
 

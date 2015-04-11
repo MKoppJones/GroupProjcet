@@ -17,6 +17,7 @@ public class PFind : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+        //Get the grid costs so the entity knows what to follow
 		eGridCosts = GameObject.Find ("MapLoader").GetComponent<MapLoad> ().gridCosts;
 
 		cGridC = (int)transform.position.x; cGridR = (int)transform.position.z;
