@@ -55,6 +55,7 @@
      <Compile Include="Assets\Main_Game\Scripts\ScannerScript.cs" />
      <Compile Include="Assets\Main_Game\Scripts\SpawnScript.cs" />
      <Compile Include="Assets\Main_Game\Scripts\UICamera.cs" />
+     <Compile Include="Assets\MenuScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

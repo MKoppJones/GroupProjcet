@@ -175,7 +175,7 @@ public class ScannerScript : MonoBehaviour {
                         {
 
     						//Successful detection, set condition here.
-                            col.GetComponent<Renderer>().material = detectedMaterial;
+                            col.gameObject.GetComponent<MeshRenderer>().material = detectedMaterial;
     						badFiles++;
     					}
     				}

@@ -8,7 +8,7 @@ public class MCamera : MonoBehaviour {
 	
 	void Start () 
 	{
-		//Do something here
+        GameObject.Find("HUD").GetComponent<Canvas>().worldCamera = this.gameObject.GetComponent<Camera>();
 	}
 
 	public void Initialize(Transform t)
