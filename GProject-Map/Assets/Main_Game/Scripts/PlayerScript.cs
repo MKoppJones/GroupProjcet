@@ -62,7 +62,7 @@ public class PlayerScript : MonoBehaviour {
         if (GameObject.FindWithTag("Scanner").GetComponent<ScannerScript>().isActive)
             scannerActive = "Online";
         GameObject.Find("StatusText").GetComponent<Text>().text =
-            "UP\t\t:\t" + points.ToString() + "\nScore\t:\t" + points.ToString() + "\nTime\t:\t" + Time.deltaTime.ToString("F1") + "\nScan\t:\t" + scannerActive;
+            "UP\t\t:\t" + points.ToString() + "\nScore\t:\t" + points.ToString() + "\nTime\t:\t" + Time.time.ToString("F1") + "\nScan\t:\t" + scannerActive;
 
     }
 }

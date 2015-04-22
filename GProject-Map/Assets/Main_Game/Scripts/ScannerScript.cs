@@ -10,6 +10,7 @@ public class ScannerScript : MonoBehaviour {
 	public float scanRadius = 25;
 	public float timer = 0.0f;
     public float rps = 0.05f;
+	public Slider energy;
     public Material detectedMaterial;
 
 	//Current scanner version index
@@ -38,6 +39,8 @@ public class ScannerScript : MonoBehaviour {
     {
         originalSize = transform.localScale;
         originalSphereSize = this.GetComponent<SphereCollider>().radius;
+
+		energy = GameObject.Find ("EnergySlider").GetComponent<Slider>();
 	}
 
 	void Update () 
@@ -48,6 +51,7 @@ public class ScannerScript : MonoBehaviour {
 		//Methods to invoke
 		HandleInput ();
 		Tick ();
+		RefillScanner ();
 		UpdateUI ();
 
 		//Update external variables
@@ -56,10 +60,12 @@ public class ScannerScript : MonoBehaviour {
 		PlayerScript pScript = GameObject.FindGameObjectWithTag ("Player").GetComponent (typeof(PlayerScript)) as PlayerScript;
 		pScript.attackMultiplier = attackMult;
 		pScript.moveMultiplier = moveMult;
+		
 	}
 
 	void UpdateUI()
 	{
+        string scanTypeName;
 		if (isActive) 
         {
 			//totalScannedText.text = "Files Scanned: " + filesScanned;
@@ -69,6 +75,17 @@ public class ScannerScript : MonoBehaviour {
         PlayerScript pScript = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerScript> ();
         GameObject.Find ("ScanText").GetComponent<Text>().text =
             "Scanned\t:\t" + filesScanned.ToString() + "\nDetected\t:\t" + badFiles.ToString() + "\nDestroyed\t:\t" + pScript.destroyed.ToString() + "\n";
+
+        if (currentScanner == 0)
+            scanTypeName = "Free";
+        else if (currentScanner == 1)
+            scanTypeName = "Paid";
+        else if (currentScanner == 2)
+            scanTypeName = "Commercial";
+        else
+            scanTypeName = "";
+        GameObject.Find("ScanType").GetComponent<Text>().text =
+            "Type:\n" + scanTypeName;
 	}
 	
 	void ChangeScanner(int index)
@@ -148,6 +165,20 @@ public class ScannerScript : MonoBehaviour {
                         }
                     }
                     break;
+			case 2:
+				if (isScanning && energy.value > 0) 
+				{
+					energy.value -= 5 * Time.deltaTime;
+					Scan ();
+				}
+				else if(energy.value > 0)
+				{
+					isScanning = true;
+				}
+				else
+				{
+					Deactivate();
+				}
                     
                     
                 default:
@@ -229,6 +260,21 @@ public class ScannerScript : MonoBehaviour {
                         }
                     }
                     break;
+
+				case 2:
+					if (col.tag == "Bit")
+						filesScanned++;
+					
+					//Virus detected
+					if (col.tag == "Virus") 
+					{
+						filesScanned++;
+						System.Random rnd = new System.Random ();
+						
+						//Successful detection, set condition here.
+						col.gameObject.GetComponent<MeshRenderer>().material = detectedMaterial;
+						badFiles++;
+					}
                     
                 default:
                     break;
@@ -242,6 +288,15 @@ public class ScannerScript : MonoBehaviour {
         {
 			if(isActive) Deactivate();
 			else Activate ();
+		}
+	}
+
+	void RefillScanner()
+	{
+		if (!isActive) {
+			if (energy.value < energy.maxValue) {
+				energy.value += Time.deltaTime * 8;
+			}
 		}
 	}
 
