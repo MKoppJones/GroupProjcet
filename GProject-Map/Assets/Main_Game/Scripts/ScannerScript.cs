@@ -9,7 +9,7 @@ public class ScannerScript : MonoBehaviour {
 	public float pingTime = 8.0f;
 	public float scanRadius = 25;
 	public float timer = 0.0f;
-    public float rps = 0.1f;
+    public float rps = 0.05f;
     public Material detectedMaterial;
 
 	//Current scanner version index
@@ -24,16 +24,20 @@ public class ScannerScript : MonoBehaviour {
 	private bool isScanning = true;
 
 	//Public so we can update the UI
-	private bool isActive = false;
+	public bool isActive = false;
 	
 	private int filesScanned = 0;
 	private int badFiles = 0;
+
+    private Vector3 originalSize;
+    private float originalSphereSize;
 	
 	
 	// Use this for initialization
 	void Start () 
     {
-
+        originalSize = transform.localScale;
+        originalSphereSize = this.GetComponent<SphereCollider>().radius;
 	}
 
 	void Update () 
@@ -60,7 +64,11 @@ public class ScannerScript : MonoBehaviour {
         {
 			//totalScannedText.text = "Files Scanned: " + filesScanned;
 			//totalBadFoundText.text = "Bad Files: " + badFiles;
-		}
+		}            
+            //Update core health
+        PlayerScript pScript = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerScript> ();
+        GameObject.Find ("ScanText").GetComponent<Text>().text =
+            "Scanned\t:\t" + filesScanned.ToString() + "\nDetected\t:\t" + badFiles.ToString() + "\nDestroyed\t:\t" + pScript.destroyed.ToString() + "\n";
 	}
 	
 	void ChangeScanner(int index)
@@ -93,6 +101,9 @@ public class ScannerScript : MonoBehaviour {
 		isActive = false;
 		attackMult = 1f;
 		moveMult = 1f;
+
+        transform.localScale = originalSize;
+        this.GetComponent<SphereCollider>().radius = originalSphereSize;
 	}
 
 	void Tick()
@@ -121,9 +132,26 @@ public class ScannerScript : MonoBehaviour {
 					}
 					break;
 
-
-				default:
-					break;
+                case 1:
+                    if (isScanning) 
+                    {
+                        Scan ();
+                    }
+                    else 
+                    {
+                        timer += Time.deltaTime;
+                        if (timer >= pingTime) 
+                        {
+                            isScanning = true;
+                            badFiles = 0;
+                            filesScanned = 0;
+                        }
+                    }
+                    break;
+                    
+                    
+                default:
+                    break;
 				}
 		} 
 
@@ -171,7 +199,7 @@ public class ScannerScript : MonoBehaviour {
     					filesScanned++;
     					System.Random rnd = new System.Random ();
                         
-    					if (rnd.Next (100) < 75) 
+    					if (rnd.Next (100) < 50) 
                         {
 
     						//Successful detection, set condition here.
@@ -181,10 +209,30 @@ public class ScannerScript : MonoBehaviour {
     				}
     				break;
 
-    			
-    			default:
-    				break;
-			}
+                case 1:
+                    //Bit detected
+                    if (col.tag == "Bit")
+                        filesScanned++;
+                    
+                    //Virus detected
+                    if (col.tag == "Virus") 
+                    {
+                        filesScanned++;
+                        System.Random rnd = new System.Random ();
+                        
+                        if (rnd.Next (100) < 75) 
+                        {
+                            
+                            //Successful detection, set condition here.
+                            col.gameObject.GetComponent<MeshRenderer>().material = detectedMaterial;
+                            badFiles++;
+                        }
+                    }
+                    break;
+                    
+                default:
+                    break;
+            }
 		}
 	}
 

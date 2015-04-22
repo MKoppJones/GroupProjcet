@@ -13,6 +13,7 @@ public class MapLoad : MonoBehaviour {
 	public GameObject bwall;
 	public GameObject floor;
 	public GameObject player;
+    public GameObject gun;
 	public GameObject camera;
 
 	public float coreX = 0f;
@@ -91,7 +92,9 @@ public class MapLoad : MonoBehaviour {
 					bClone.transform.Rotate (Vector3.right * 90);
 					bClone.transform.parent = transform;
 
-					GameObject P = (GameObject)Instantiate (player, new Vector3 (startX,1f,startZ), Quaternion.identity);
+                    GameObject P = (GameObject)Instantiate (player, new Vector3 (startX,0.5f,startZ), transform.rotation);
+                    GameObject G = (GameObject)Instantiate (gun, new Vector3 (startX+0.3f,0.5f,startZ), Quaternion.identity);
+                    G.transform.parent = P.transform;
 					
 					GameObject C = (GameObject)Instantiate (camera, new Vector3 (startX,2f,startZ), Quaternion.identity);
 					MCamera CClass = C.GetComponent (typeof(MCamera)) as MCamera;

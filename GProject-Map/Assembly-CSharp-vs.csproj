@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EHealth.cs" />
      <Compile Include="Assets\Main_Game\Scripts\CoreScript.cs" />
      <Compile Include="Assets\Main_Game\Scripts\GameHandle.cs" />
      <Compile Include="Assets\Main_Game\Scripts\MCamera.cs" />
@@ -56,6 +57,12 @@
      <Compile Include="Assets\Main_Game\Scripts\SpawnScript.cs" />
      <Compile Include="Assets\Main_Game\Scripts\UICamera.cs" />
      <Compile Include="Assets\MenuScript.cs" />
+     <Compile Include="Assets\Scott_Gun\Scripts\BeautyShot.cs" />
+     <Compile Include="Assets\Scott_Gun\Scripts\RandomAnimationPoint.cs" />
+     <Compile Include="Assets\Scott_Gun\Scripts\RandomParticlePoint.cs" />
+     <Compile Include="Assets\Scott_Gun\Scripts\VolumeHandler.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerShooting.cs" />
+     <None Include="Assets\Scott_Gun\Shaders\Rim Lit Bumped Specular.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

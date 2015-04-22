@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
@@ -8,6 +9,9 @@ public class PlayerScript : MonoBehaviour {
 	public float attackSpeed = 2f;
 	public float moveMultiplier = 1f;
 	public float attackMultiplier = 1f;
+    public int score = 0;
+    public int points = 0;
+    public int destroyed = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -49,5 +53,16 @@ public class PlayerScript : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed);
 		}
 
+        UpdateUI();
 	}
+
+    void UpdateUI()
+    {
+        string scannerActive = "Offline";
+        if (GameObject.FindWithTag("Scanner").GetComponent<ScannerScript>().isActive)
+            scannerActive = "Online";
+        GameObject.Find("StatusText").GetComponent<Text>().text =
+            "UP\t\t:\t" + points.ToString() + "\nScore\t:\t" + points.ToString() + "\nTime\t:\t" + Time.deltaTime.ToString("F1") + "\nScan\t:\t" + scannerActive;
+
+    }
 }

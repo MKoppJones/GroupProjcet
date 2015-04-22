@@ -36,9 +36,10 @@ public class CoreScript : MonoBehaviour {
 		{
 			Destroy(col.gameObject);
 
-			money += 5;
-		}
-
+            PlayerScript pScript = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerScript> ();
+            pScript.score += 5; pScript.points += 5;
+        }
+        
 		//Virus collision detection
 		if (col.gameObject.tag == "Virus") 
 		{

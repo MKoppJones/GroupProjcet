@@ -1,11 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\Downloads\Survival Shooter\Survival Shooter\Assets\Scripts\Enemy\EnemyMovement.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Main_Game\Scripts\PlayerScript.cs">
     <Files>
-      <File FileName="..\..\..\..\Downloads\Survival Shooter\Survival Shooter\Assets\_CompletedAssets\Scripts\Camera\TopDownCamera.cs" Line="20" Column="89" />
-      <File FileName="Assets\Main_Game\Scripts\PlayerScript.cs" Line="23" Column="3" />
-      <File FileName="..\..\..\..\Downloads\Survival Shooter\Survival Shooter\Assets\Scripts\Player\PlayerMovement.cs" Line="13" Column="25" />
-      <File FileName="..\..\..\..\Downloads\Survival Shooter\Survival Shooter\Assets\Scripts\Enemy\EnemyMovement.cs" Line="25" Column="1" />
+      <File FileName="Assets\Scripts\Player\PlayerShooting.cs" Line="28" Column="9" />
+      <File FileName="Assets\Main_Game\Scripts\CoreScript.cs" Line="23" Column="1" />
+      <File FileName="Assets\Main_Game\Scripts\GameHandle.cs" Line="40" Column="15" />
+      <File FileName="Assets\Main_Game\Scripts\MapLoad.cs" Line="96" Column="94" />
+      <File FileName="Assets\Main_Game\Scripts\ScannerScript.cs" Line="51" Column="15" />
+      <File FileName="Assets\Main_Game\Scripts\PFind.cs" Line="14" Column="5" />
+      <File FileName="Assets\Main_Game\Scripts\PlayerScript.cs" Line="35" Column="4" />
+      <File FileName="Assets\EHealth.cs" Line="21" Column="67" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
