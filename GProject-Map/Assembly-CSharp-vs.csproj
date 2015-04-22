@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\EHealth.cs" />
+     <Compile Include="Assets\EndGameScript.cs" />
      <Compile Include="Assets\Main_Game\Scripts\CoreScript.cs" />
      <Compile Include="Assets\Main_Game\Scripts\GameHandle.cs" />
      <Compile Include="Assets\Main_Game\Scripts\MCamera.cs" />

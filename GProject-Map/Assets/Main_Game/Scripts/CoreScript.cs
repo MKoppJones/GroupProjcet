@@ -49,7 +49,8 @@ public class CoreScript : MonoBehaviour {
 
 			if(health == 0)
 			{
-				//Set end game conditions here
+                //Set end game conditions here
+                Application.LoadLevel(2);
 				Destroy (gameObject);
 			}
 		}

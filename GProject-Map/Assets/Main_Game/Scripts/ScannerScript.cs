@@ -179,8 +179,8 @@ public class ScannerScript : MonoBehaviour {
 				{
 					Deactivate();
 				}
-                    
-                    
+
+                break;
                 default:
                     break;
 				}
@@ -275,7 +275,7 @@ public class ScannerScript : MonoBehaviour {
 						col.gameObject.GetComponent<MeshRenderer>().material = detectedMaterial;
 						badFiles++;
 					}
-                    
+                    break;
                 default:
                     break;
             }
@@ -284,11 +284,21 @@ public class ScannerScript : MonoBehaviour {
 
 	void HandleInput()
 	{
-		if (Input.GetButton ("TScanner")) 
+		if (Input.GetButtonDown ("TScanner")) 
         {
 			if(isActive) Deactivate();
 			else Activate ();
 		}
+
+        if (Input.GetButtonDown("Interact"))
+        {
+                Deactivate();
+                currentScanner++;
+            if (currentScanner == 3)
+            {
+                currentScanner = 0;
+            }
+        }
 	}
 
 	void RefillScanner()
